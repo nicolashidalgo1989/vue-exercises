@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Computed</title>    
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+	<div id="app" class="container mt-5">
+
+ 		<h3>{{mensaje}}</h3>
+ 		<h3>Invertido : {{ invertido }}</h3>
+ 		<input type="text" class="form-control my-3" v-model="mensaje">
+ 		
+ 		<hr>
+
+ 		<div class="progress my-4">
+			<div class="progress-bar" role="progressbar" :aria-valuenow="contador" aria-valuemin="0" aria-valuemax="100" 
+			:style="{ 'width' : contador + '%' }"
+			:class="progreso"
+			>{{ contador }}</div>
+		</div>
+
+ 		<div class="d-flex align-items-center my-3">
+ 			<button class="btn btn-primary" @click="if(contador > 0 )--contador">-</button>
+ 			<p class="mx-3 h4"> {{ contador }} </p>
+ 			<button class="btn btn-primary" @click="if(contador < 100 )++contador">+</button>
+ 		</div>
+
+	</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/04.js"></script>
+</body>
+</html>

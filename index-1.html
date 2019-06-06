@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stock | Vue</title>    
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div id="app" class="container">
+    	<h1 class="m-0 h2">{{ titulo }}</h1>
+    	<form class="form-inline">
+	    	<div class="form-group my-4">
+	    		<input class="form-control mr-3" type="text" v-model="item" @keyup.enter.prevent="agregar"> 
+	    		<button class="btn btn-success" @click.prevent="agregar">Add</button>
+	    	</div>
+    	</form>
+    	<form class="form-inline">
+	    	<ul class="list-unstyled">
+	    		<li v-for="item in stock">
+	    			<div class="form-group mb-3">
+	    				<button class="btn btn-success" @click.prevent="restar(item)" v-if="item.cantidad > 0">-</button>
+	    				<button class="btn btn-success" v-else disabled>-</button>
+	    				<input class="form-control mx-2" type="number" v-model.number="item.cantidad" min="0" max="100">
+	    				<button class="btn btn-success" @click.prevent="sumar(item)" v-if="item.cantidad < 100">+</button> 
+	    				<button class="btn btn-success" v-else disabled>+</button> 
+	    				<p class="m-0 mx-2" :class="{ 'text-muted' : item.cantidad === 0 || item.cantidad === '' }">{{ item.nombre}}</p>
+	    				<span style="color:red" v-if="item.cantidad === 0 || item.cantidad === ''">Sold out</span>
+	    			</div>
+	    		</li>
+	    	</ul>
+    	</form>
+	    <h4>Total: {{ sumarStock }}</h4>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/01.js"></script>
+</body>
+</html>

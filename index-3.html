@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD Localstorage / Vue</title>    
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div id="app" class="container mt-5">
+
+		<h3>{{ titulo }}</h3>
+
+		<form class="form-inline">
+			
+			<div class="form-group">
+
+				<input type="text" v-model="tarea" class="mr-3 form-control my-3" @keyup.enter.prevent="agregar">
+				<button class="btn btn-primary" @click.prevent="agregar">Add</button>
+			
+			</div>
+
+		</form>
+		
+		<div class="my-3">
+			
+			<div :class="[ 'alert', tarea.estado ? 'alert-primary' : 'alert-danger' ]" role="alert" v-for="(tarea, index) in tareas"> 
+				<div class="d-flex justify-content-between align-items-center">
+					<p class="m-0 p-0">{{ index + 1}} - {{ tarea.nombre }}</p>
+					<div>
+						<button class="btn btn-sm btn-success" @click="editar(index)">Ok</button>
+						<button class="btn btn-sm btn-danger" @click="eliminar(index)">X</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/03.js"></script>
+</body>
+</html>
