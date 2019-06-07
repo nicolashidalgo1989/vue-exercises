@@ -8,6 +8,7 @@ const app = new Vue({
             'Tasks in Local Storage',
             'Computed',
             'Componentes',
+            'Comunicacion entre Componentes',
             'Vuex' 
         ]
     }

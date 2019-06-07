@@ -3,9 +3,12 @@ Vue.component('titulo',{
 	template: `
 	<div>
 		<h1>Componente Padre</h1>
-		<h2 class="my-5">{{ numero }}</h2>
-		<hr>
-		<hijo></hijo>
+		<div class="row">
+			<div clas="col">
+				<h2 class="my-5">{{ numero }}</h2> 
+			</div>
+			<hijo></hijo>
+		</div>
 	</div>
 	`,
 	computed:{
@@ -15,7 +18,7 @@ Vue.component('titulo',{
 
 Vue.component('hijo', {
 	template: `
-	<div>
+	<div> 
 		<h2>Componente Hijo</h2>
 		<form class="form-inline my-5">	
 			<div class="form-group d-flex justify-content-center aling-items-center">	
@@ -29,7 +32,7 @@ Vue.component('hijo', {
 		<button class="btn-sm btn btn-success my-4" @click="obtenerCursos">Obtener cursos</button>
 		<ul class="list-unstyled">
 			<li v-for="curso of cursos">{{ curso.nombre }}</li>
-	</ul>	
+		</ul>	
 	</div>
 	`,
 	computed:{
