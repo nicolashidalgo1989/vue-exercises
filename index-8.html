@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vuexample</title>    
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>{{ welcome }}</h1>
+        <h2>{{ message }}</h2>
+        <h3>{{ count }}</h3>
+        <button class="btn btn-success" @click="plus">+</button>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+<script>
+
+    const store =  new Vuex.Store({
+
+        state : {
+
+            message: 'Hello Vuex',
+            count: 0
+
+        },
+
+        mutations : { //syncronous
+
+            plus(state, valor) {
+                return state.count += valor;
+            }
+
+        },
+
+        actions : { //asyncronous
+
+            plus(state, valor){
+                state.commit('plus', valor);
+            }
+
+        },
+
+        getters : {
+
+            message(state) {
+                return state.message.toUpperCase();
+            },
+
+            counter(state){
+                return state.count;
+            }
+
+        }
+
+    });
+    new Vue({
+
+        el: '#app',
+        
+        data : {
+            welcome: 'Hello Vue'
+        },
+
+        methods : { 
+
+            plus(){
+                store.dispatch('plus', 20);
+            }
+
+        },
+
+        computed : {
+
+            message(){
+                return store.getters.message;
+            },
+
+            count(){
+                return store.getters.counter;
+            }
+
+        }
+
+    });
+
+</script>
+</body>
+</html>

@@ -9,7 +9,8 @@ const app = new Vue({
             'Computed',
             'Componentes',
             'Comunicacion entre Componentes',
-            'Vuex' 
+            'Vuex',
+            'Vuex example'  
         ]
     }
 })
