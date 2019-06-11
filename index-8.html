@@ -9,16 +9,12 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div id="app" class="container">
-        <h1>{{ welcome }}</h1>
-        <h2>{{ message }}</h2>
-        <h3>{{ count }}</h3>
-        <button class="btn btn-success" @click="plus">+</button>
+    <div id="app" class="container"> 
     </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
 <script>
-
+    
     const store =  new Vuex.Store({
 
         state : {
@@ -30,16 +26,24 @@
 
         mutations : { //syncronous
 
-            plus(state, valor) {
+            plusMutation(state, valor) {
                 return state.count += valor;
+            },
+
+            minusMutation(state, valor) {
+                return state.count -= valor;
             }
 
         },
 
         actions : { //asyncronous
 
-            plus(state, valor){
-                state.commit('plus', valor);
+            plusAction(state, valor){
+                state.commit('plusMutation', valor);
+            },
+ 
+            minusAction(state, valor){
+                state.commit('minusMutation', valor);
             }
 
         },
@@ -57,9 +61,44 @@
         }
 
     });
-    new Vue({
+
+    const counter = {
+
+        template: `
+            <div class="col-4 align-items-center justify-content-center h-100 d-flex">
+                <p class="display-3">{{ count }}</p>   
+            </div>
+        `,
+        computed: { 
+
+            count(){
+                return this.$store.getters.counter;
+            }
+
+        }
+    };  
+
+    const app = new Vue({
 
         el: '#app',
+
+        store,
+
+        components: { counter },
+
+        template: `
+            <div class="container h-100">
+                <div class="row align-items-center h-100 text-center justify-content-center">
+                    <div class="col-2">
+                        <button class="btn btn-success" @click="minusMethod">-</button>
+                    </div>
+                    <counter></counter>
+                    <div class="col-2">
+                        <button class="btn btn-success" @click="plusMethod">+</button>
+                    </div>
+                </div>
+            </div>
+        `,
         
         data : {
             welcome: 'Hello Vue'
@@ -67,8 +106,12 @@
 
         methods : { 
 
-            plus(){
-                store.dispatch('plus', 20);
+            plusMethod(){
+                store.dispatch('plusAction', 20);
+            },
+
+            minusMethod(){
+                store.dispatch('minusAction', 20);
             }
 
         },
@@ -78,10 +121,6 @@
             message(){
                 return store.getters.message;
             },
-
-            count(){
-                return store.getters.counter;
-            }
 
         }
 
